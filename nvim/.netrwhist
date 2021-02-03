@@ -1,5 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =5
+let g:netrw_dirhistcnt =8
+let g:netrw_dirhist_8='/home/luis/programming'
+let g:netrw_dirhist_7='/home/luis/programming/parse_practice'
+let g:netrw_dirhist_6='/home/luis/programming/raytracer_rs'
 let g:netrw_dirhist_5='/home/luis/.config/.git'
 let g:netrw_dirhist_4='/home/luis/programming/lox_port/target'
 let g:netrw_dirhist_3='/home/luis/programming/puffylang/src/expr'
@@ -7,6 +10,3 @@ let g:netrw_dirhist_2='/home/luis/programming'
 let g:netrw_dirhist_1='/home/luis/programming/sqlite_project/src'
 let g:netrw_dirhist_0='/home/luis/programming/my-project'
 let g:netrw_dirhist_9='/home/luis/programming/my-project/src'
-let g:netrw_dirhist_8='/home/luis/programming/my-project'
-let g:netrw_dirhist_7='/home/luis/programming/my-project/src'
-let g:netrw_dirhist_6='/home/luis/programming/my-project'
