@@ -1,6 +1,6 @@
 " Map Leader to Space
 let mapleader = "\<Space>"
-
+xnoremap <leader>( <ESC>`>a)<ESC>`<i(<ESC>
 "source vim config file with leader + s
 nnoremap <leader>s :source %<CR>
 "source and PlugInstall
@@ -96,8 +96,8 @@ nnoremap <Leader>gaf :Gw<CR>
 nnoremap <F5> :UndotreeToggle<CR>
 
 " MiniMap toggle
-nmap <C-M> :MinimapToggle<CR>
-let g:minimap_auto_start = 0
+" nmap <C-M> :MinimapToggle<CR>
+" let g:minimap_auto_start = 0
 
 "Go setup
 
@@ -169,3 +169,38 @@ let g:idris_indent_let = 4
 let g:idris_indent_where = 6
 let g:idris_indent_do = 3
 let g:idris_indent_rewrite = 8
+
+
+
+
+" ========= Window resizing
+let g:lens#height_resize_max = 30
+
+" ========= Easymotion
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+
+" Jump to anywhere you want with minimal keystrokes, with just one key
+" binding.
+" " `s{char}{label}`
+nmap s <Plug>(easymotion-overwin-f)
+" " or
+" " `s{char}{char}{label}`
+" " Need one more keystroke, but on average, it may be more comfortable.
+nmap s <Plug>(easymotion-overwin-f2)
+"
+"" Turn on case-insensitive feature
+let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)"
+" "
+"
+"
+"
+"
+
+nnoremap <C-n> :NvimTreeToggle<CR>
+nnoremap <leader>r :NvimTreeRefresh<CR>
+nnoremap <leader>n :NvimTreeFindFile<CR>
+

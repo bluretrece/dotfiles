@@ -2,7 +2,7 @@ set colorcolumn=97
 set undofile
 syntax on
 filetype plugin indent on
-set undodir=~/.config/nvim/undodir
+" set undodir=~/.config/nvim/undodir
 set shiftwidth=4
 set shiftround
 set tabstop=8

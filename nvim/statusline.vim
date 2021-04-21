@@ -1,4 +1,5 @@
-lua require('plugins.evil-statusline')
+" lua require('plugins.evil-statusline')
+lua require('plugins.evilline')
 "Spaceline tweaks
 let g:spaceline_colorscheme = 'space'
 let g:spaceline_seperate_style = 'slant-cons'
