@@ -1,5 +1,7 @@
 " Map Leader to Space
 let mapleader = "\<Space>"
+" Lsp Trouble keys
+nnoremap <leader>xx <cmd>LspTroubleToggle<cr>
 xnoremap <leader>( <ESC>`>a)<ESC>`<i(<ESC>
 "source vim config file with leader + s
 nnoremap <leader>s :source %<CR>
@@ -119,7 +121,6 @@ let g:highlightedyank_highlight_duration = 0100
 
 " Useful keybindings
 nmap <C-N> :NERDTreeToggle<CR>
-nmap <C-T> :TagbarToggle<CR>
 nmap <C-Y> :RustFmt<CR>
 
 let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -143,6 +144,8 @@ let g:stylishask_on_save = 0
 au FileType haskell nnoremap <silent> <leader>ps :Stylishask<CR>
 
 "=================== CoC config   ==========================
+let g:coc_start_at_startup = v:false
+let b:coc_enabled=0
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
@@ -170,9 +173,6 @@ let g:idris_indent_where = 6
 let g:idris_indent_do = 3
 let g:idris_indent_rewrite = 8
 
-
-
-
 " ========= Window resizing
 let g:lens#height_resize_max = 30
 
@@ -194,13 +194,34 @@ let g:EasyMotion_smartcase = 1
 " JK motions: Line motions
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)"
-" "
-"
-"
-"
-"
 
 nnoremap <C-n> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
 
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" LSP code actions
+set updatetime=300
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
+autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+nnoremap <silent> gi    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> ge    <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
+nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> <leader>f    <cmd>lua vim.lsp.buf.formatting()<CR>
+nnoremap <silent> <leader>rn    <cmd>lua vim.lsp.buf.rename()<CR>
+
+nnoremap <silent> <leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
+xmap <silent> <leader>a <cmd>lua vim.lsp.buf.range_code_action()<CR>
+
+
+"Vista defaults
+let g:vista_default_executive = 'nvim_lsp'
+let g:vista_sidebar_width = 5
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+nmap <C-T> :Vista<CR>

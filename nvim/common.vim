@@ -1,4 +1,4 @@
-set colorcolumn=97
+" set colorcolumn=97
 set undofile
 syntax on
 filetype plugin indent on
@@ -19,40 +19,6 @@ set background=dark
 set termguicolors
 set mouse=a
 set noshowmode
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
+set signcolumn=yes
+set completeopt=menuone,noselect
+set shortmess+=c

@@ -9,7 +9,8 @@ Plug 'jose-elias-alvarez/buftabline.nvim'
 Plug 'idris-hackers/idris-vim'
 Plug 'kyazdani42/nvim-web-devicons' " lua
 Plug 'derekwyatt/vim-scala'
-Plug 'ghifarit53/tokyonight-vim'
+Plug 'tiagovla/tokyodark.nvim'
+Plug 'nvim-lua/lsp-status.nvim'
 Plug 'justinmk/vim-sneak'
 Plug 'machakann/vim-highlightedyank'
 Plug 'rust-lang/rust.vim'
@@ -21,7 +22,6 @@ Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'rhysd/vim-clang-format'
 Plug 'neovimhaskell/haskell-vim'
-Plug 'preservim/tagbar'
 Plug 'tpope/vim-surround'
 Plug 'racer-rust/vim-racer'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -32,7 +32,6 @@ Plug 'luochen1990/rainbow'
 Plug 'jiangmiao/auto-pairs'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'WolfgangMehner/c-support'
-Plug 'blueyed/vim-diminactive'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
 Plug 'chriskempson/base16-vim'
 Plug 'joshdick/onedark.vim'
@@ -47,7 +46,13 @@ Plug 'easymotion/vim-easymotion'
 Plug 'glepnir/oceanic-material'
 Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 Plug 'mbbill/undotree'
-Plug 'pineapplegiant/spaceduck'
 Plug 'franbach/miramare'
 Plug 'tpope/vim-commentary'
+Plug 'folke/lsp-trouble.nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/lsp_extensions.nvim'
+Plug 'hrsh7th/nvim-compe'
+Plug 'liuchengxu/vista.vim'
 call plug#end()
+
+lua require("trouble").setup {}
