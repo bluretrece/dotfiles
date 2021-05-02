@@ -3,12 +3,12 @@ Plug 'vimoxide/vim-cinnabar'
 Plug 'folke/tokyonight.nvim'
 Plug 'camspiers/lens.vim'
 Plug 'fcpg/vim-farout'
-Plug 'alx741/vim-stylishask'
-Plug 'alx741/vim-hindent'
+Plug 'alx741/vim-stylishask', { 'for': ['haskell'] }
+Plug 'alx741/vim-hindent', { 'for': ['haskell'] }
 Plug 'jose-elias-alvarez/buftabline.nvim'
-Plug 'idris-hackers/idris-vim'
+Plug 'idris-hackers/idris-vim', {'for': ['idris']}
 Plug 'kyazdani42/nvim-web-devicons' " lua
-Plug 'derekwyatt/vim-scala'
+Plug 'derekwyatt/vim-scala', { 'for': ['scala'] }
 Plug 'tiagovla/tokyodark.nvim'
 Plug 'nvim-lua/lsp-status.nvim'
 Plug 'justinmk/vim-sneak'
@@ -16,12 +16,12 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
 Plug 'HerringtonDarkholme/yats.vim'
-Plug 'pangloss/vim-javascript'    " JavaScript support
-Plug 'leafgarland/typescript-vim' " TypeScript syntax
-Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
+Plug 'pangloss/vim-javascript', {'for': ['javascript', 'html', 'jsx']}
+Plug 'leafgarland/typescript-vim', {'for': ['javascript', 'html', 'jsx']}
+Plug 'maxmellon/vim-jsx-pretty', {'for': ['javascript', 'html', 'jsx']}
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'rhysd/vim-clang-format'
-Plug 'neovimhaskell/haskell-vim'
+Plug 'neovimhaskell/haskell-vim', { 'for': ['haskell'] }
 Plug 'tpope/vim-surround'
 Plug 'racer-rust/vim-racer'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -31,7 +31,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'luochen1990/rainbow'
 Plug 'jiangmiao/auto-pairs'
 Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'WolfgangMehner/c-support'
+Plug 'WolfgangMehner/c-support', {'for': ['cpp']}
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
 Plug 'chriskempson/base16-vim'
 Plug 'joshdick/onedark.vim'
@@ -53,6 +53,20 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'hrsh7th/nvim-compe'
 Plug 'liuchengxu/vista.vim'
-call plug#end()
+Plug 'glepnir/dashboard-nvim'
+Plug 'tjdevries/colorbuddy.nvim'
+Plug 'marko-cerovac/material.nvim'
+" === Git integration 
+" if has('nvim') || has('patch-8.0.902')
+"   Plug 'mhinz/vim-signify'
+" else
+"   Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
+" endif
+" Plug 'airblade/vim-gitgutter'
+" Plug 'romgrk/barbar.nvim'
 
+
+
+
+call plug#end()
 lua require("trouble").setup {}

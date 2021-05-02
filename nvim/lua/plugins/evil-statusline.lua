@@ -1,12 +1,15 @@
 local gl = require('galaxyline')
 local gls = gl.section
 local extension = require('galaxyline.provider_extensions')
+local u = require'utils'.u
+local diagnostic = require('galaxyline.provider_diagnostic')
+local condition = require("galaxyline.condition")
+local lspclient = require("galaxyline.provider_lsp")
+
 
 gl.short_line_list = {
     'LuaTree',
-    'vista',
     'dbui',
-    'startify',
     'term',
     'nerdtree',
     'fugitive',
@@ -14,7 +17,6 @@ gl.short_line_list = {
     'plug'
 }
 
--- VistaPlugin = extension.vista_nearest
 
 local colors = {
     bg = '#282c34',
@@ -42,35 +44,6 @@ local function lsp_status(status)
         end
     end
     return shorter_stat
-end
-
-
-local function get_coc_lsp()
-  local status = vim.fn['coc#status']()
-  if not status or status == '' then
-      return ''
-  end
-  return lsp_status(status)
-end
-
-function get_diagnostic_info()
-  if vim.fn.exists('*coc#rpc#start_server') == 1 then
-    return get_coc_lsp()
-    end
-  return ''
-end
-
-local function get_current_func()
-  local has_func, func_name = pcall(vim.fn.nvim_buf_get_var,0,'coc_current_function')
-  if not has_func then return end
-      return func_name
-  end
-
-function get_function_info()
-  if vim.fn.exists('*coc#rpc#start_server') == 1 then
-    return get_current_func()
-    end
-  return ''
 end
 
 local function trailing_whitespace()
@@ -148,9 +121,10 @@ gls.left[2] = {
       vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color[vim_mode])
       return alias[vim_mode] .. '   '
     end,
-    highlight = {colors.red,colors.line_bg,'bold'},
+    highlight = {colors.red,colors.line_bg},
   },
 }
+
 gls.left[3] ={
   FileIcon = {
     provider = 'FileIcon',
@@ -158,11 +132,12 @@ gls.left[3] ={
     highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.line_bg},
   },
 }
+
 gls.left[4] = {
   FileName = {
     provider = {'FileName','FileSize'},
     condition = buffer_not_empty,
-    highlight = {colors.fg,colors.line_bg,'bold'}
+    highlight = {colors.fg,colors.line_bg}
   }
 }
 
@@ -173,11 +148,12 @@ gls.left[5] = {
     highlight = {colors.orange,colors.line_bg},
   }
 }
+
 gls.left[6] = {
   GitBranch = {
     provider = 'GitBranch',
     condition = require('galaxyline.provider_vcs').check_git_workspace,
-    highlight = {'#8FBCBB',colors.line_bg,'bold'},
+    highlight = {'#8FBCBB',colors.line_bg},
   }
 }
 
@@ -232,8 +208,11 @@ gls.left[11] = {
 
 gls.left[12] = {
   DiagnosticError = {
-    provider = 'DiagnosticError',
-    icon = '  ',
+    provider = function()
+      local n = vim.lsp.diagnostic.get_count(0, 'Error')
+      if n == 0 then return '' end
+      return string.format(' %s %d ', '', n)
+    end,
     highlight = {colors.red,colors.bg}
   }
 }
@@ -242,28 +221,44 @@ gls.left[13] = {
     provider = function () return '' end
   }
 }
+
 gls.left[14] = {
   DiagnosticWarn = {
-    provider = 'DiagnosticWarn',
-    icon = '   ',
+    provider = function()
+	local n = vim.lsp.diagnostic.get_count(0, 'Warning')
+	if n == 0 then return '' end
+	return string.format(' %s %d ',  '' , n)
+    end,
     highlight = {colors.yellow,colors.bg},
   }
 }
 
 
 gls.left[15] = {
-    CocStatus = {
-     provider = CocStatus,
-     highlight = {colors.green,colors.bg},
-     icon = '  🗱'
-    }
+     LspStatus = {
+      provider = function()
+	  return string.format(" %s ", lspclient.get_lsp_client())
+      end,
+      icon = '  🗱',
+      condition = function()
+	  return condition.check_active_lsp() and condition.hide_in_width()
+      end,
+      highlight = {colors.green,colors.bg},
+     }
 }
 
 gls.left[16] = {
-  CocFunc = {
-    provider = CocFunc,
-    icon = '  λ ',
-    highlight = {colors.yellow,colors.bg},
+  ShowLspClient = {
+    provider = 'GetLspClient',
+    condition = function ()
+      local tbl = {['dashboard'] = true,['']=true}
+      if tbl[vim.bo.filetype] then
+        return false
+      end
+      return true
+    end,
+    icon = '  λ: ',
+    highlight = {colors.yellow,colors.bg}
   }
 }
 
@@ -272,7 +267,7 @@ gls.right[1]= {
     provider = 'FileFormat',
     separator = ' ',
     separator_highlight = {colors.bg,colors.line_bg},
-    highlight = {colors.fg,colors.line_bg,'bold'},
+    highlight = {colors.fg,colors.line_bg},
   }
 }
 gls.right[4] = {
@@ -292,20 +287,20 @@ gls.right[5] = {
   }
 }
 
--- gls.right[4] = {
---   ScrollBar = {
---     provider = 'ScrollBar',
---     highlight = {colors.blue,colors.purple},
---   }
--- }
+gls.right[6] = {
+  ScrollBar = {
+    provider = 'ScrollBar',
+    highlight = {colors.yellow,colors.purple},
+  }
+}
 --
 -- gls.right[3] = {
---   Vista = {
---     provider = VistaPlugin,
---     separator = ' ',
---     separator_highlight = {colors.bg,colors.line_bg},
---     highlight = {colors.fg,colors.line_bg,'bold'},
---   }
+--     Vista = {
+-- 	provider = VistaPlugin,
+-- 	separator = ' ',
+-- 	separator_highlight = {colors.bg,colors.line_bg},
+-- 	highlight = {colors.fg,colors.line_bg,'bold'},
+--     }
 -- }
 
 gls.short_line_left[1] = {
@@ -328,3 +323,6 @@ gls.short_line_right[1] = {
     highlight = {colors.fg,colors.purple}
   }
 }
+
+
+gl.load_galaxyline()

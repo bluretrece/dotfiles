@@ -75,6 +75,7 @@ gls.left[8] = {
     highlight = {colors.red,colors.bg}
   }
 }
+
 gls.left[9] = {
   DiagnosticWarn = {
     provider = function()

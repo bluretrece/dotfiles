@@ -6,10 +6,14 @@ endif
 let g:tokyonight_style = "night"
 let g:tokyonight_italic_keywords = 0
 let g:tokyonight_italic_comments = 0
+let g:material_style = 'deep ocean'
+let g:material_italic_comments = 0 
+let g:material_flat_ui = 1
+let g:material_italic_functions = 0
+let g:material_italic_keywords = 0
+let g:material_italic_variables = 0
+" colorscheme material
 colorscheme tokyonight
-" colorscheme base16-irblack
-" colorscheme doom-one
-" colorscheme oceanic_material
 let g:moonflyItalics = 0
 let g:oceanic_material_allow_bold = 0
 

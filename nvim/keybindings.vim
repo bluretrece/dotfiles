@@ -193,7 +193,7 @@ let g:EasyMotion_smartcase = 1
 
 " JK motions: Line motions
 map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)"
+map <Leader>k <Plug>(easymotion-k)
 
 nnoremap <C-n> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
@@ -219,9 +219,62 @@ nnoremap <silent> <leader>rn    <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> <leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
 xmap <silent> <leader>a <cmd>lua vim.lsp.buf.range_code_action()<CR>
 
-
 "Vista defaults
 let g:vista_default_executive = 'nvim_lsp'
-let g:vista_sidebar_width = 5
+let g:vista_sidebar_width = 8
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 nmap <C-T> :Vista<CR>
+nnoremap <leader>t :Vista!<CR>
+
+" Dashboard
+let g:dashboard_default_executive ='fzf'
+let g:dashboard_fzf_float = 0
+let g:dashboard_custom_footer = [
+                \ '' 
+                \]
+    let g:dashboard_custom_header = [
+                \ "=================     ===============     ===============   ========  ========",
+                \ "\\\\ . . . . . . .\\\\   //. . . . . . .\\\\   //. . . . . . .\\\\  \\\\. . .\\\\// . . //",
+                \ "||. . ._____. . .|| ||. . ._____. . .|| ||. . ._____. . .|| || . . .\\/ . . .||",
+                \ "|| . .||   ||. . || || . .||   ||. . || || . .||   ||. . || ||. . . . . . . ||",
+                \ "||. . ||   || . .|| ||. . ||   || . .|| ||. . ||   || . .|| || . | . . . . .||",
+                \ "|| . .||   ||. _-|| ||-_ .||   ||. . || || . .||   ||. _-|| ||-_.|\\ . . . . ||",
+                \ "||. . ||   ||-'  || ||  `-||   || . .|| ||. . ||   ||-'  || ||  `|\\_ . .|. .||",
+                \ "|| . _||   ||    || ||    ||   ||_ . || || . _||   ||    || ||   |\\ `-_/| . ||",
+                \ "||_-' ||  .|/    || ||    \\|.  || `-_|| ||_-' ||  .|/    || ||   | \\  / |-_.||",
+                \ "||    ||_-'      || ||      `-_||    || ||    ||_-'      || ||   | \\  / |  `||",
+                \ "||    `'         || ||         `'    || ||    `'         || ||   | \\  / |   ||",
+                \ "||            .===' `===.         .==='.`===.         .===' /==. |  \\/  |   ||",
+                \ "||         .=='   \\_|-_ `===. .==='   _|_   `===. .===' _-|/   `==  \\/  |   ||",
+                \ "||      .=='    _-'    `-_  `='    _-'   `-_    `='  _-'   `-_  /|  \\/  |   ||",
+                \ "||   .=='    _-'          `-__\\._-'         `-_./__-'         `' |. /|  |   ||",
+                \ "||.=='    _-'                                                     `' |  /==.||",
+                \ "=='    _-'                        N E O V I M                         \\/   `==",
+                \ "\\   _-'                                                                `-_   /",
+                \ " `''                                                                      ``'  ",
+                \ "                                                                               ",
+                \ ]
+
+
+
+let g:fzf_layout = { 'down': '~20%' }
+let g:fzf_preview_window = []
+
+
+" let bufferline = get(g:, 'bufferline', {})
+
+" " Enable/disable animations
+" let bufferline.animation = v:false
+
+nnoremap <leader>z viw<esc>a)<esc>hbi(<esc>lel
+
+
+"Moves Blocks of code in visual mode 
+xnoremap K :move '<-2<CR>gv-gv
+xnoremap J :move '>+1<CR>gv-gv 
+
+"Identation with < and >
+vnoremap < <gv
+vnoremap > >gv
+
+
