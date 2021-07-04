@@ -24,10 +24,18 @@ autocmd FileType haskell setlocal expandtab
 " if we ever start using just spaces, as perhaps we should
 autocmd FileType make setlocal noexpandtab
 
+" Changing paste keys just for our own sanity.
+noremap p gp
+noremap P gP
+noremap gp p
+noremap gP P
+
+
+
 "Easier buffer navigation
 "nnoremap <Leader>e :bn<CR>
 "nnoremap <Leader>w :bp<CR>
-nnoremap <Leader>q :bd<CR>
+nnoremap <Leader>q :bd!<CR>
 map <C-w> :bprevious<CR>
 map <C-e> :bnext<CR>
 map <C-q> :bq<CR>
@@ -143,14 +151,6 @@ au FileType haskell nnoremap <silent> <leader>ph :Hindent<CR>
 let g:stylishask_on_save = 0
 au FileType haskell nnoremap <silent> <leader>ps :Stylishask<CR>
 
-"=================== CoC config   ==========================
-let g:coc_start_at_startup = v:false
-let b:coc_enabled=0
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -177,23 +177,23 @@ let g:idris_indent_rewrite = 8
 let g:lens#height_resize_max = 30
 
 " ========= Easymotion
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
+"let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
-" Jump to anywhere you want with minimal keystrokes, with just one key
-" binding.
-" " `s{char}{label}`
-nmap s <Plug>(easymotion-overwin-f)
-" " or
-" " `s{char}{char}{label}`
-" " Need one more keystroke, but on average, it may be more comfortable.
-nmap s <Plug>(easymotion-overwin-f2)
-"
-"" Turn on case-insensitive feature
-let g:EasyMotion_smartcase = 1
+"" Jump to anywhere you want with minimal keystrokes, with just one key
+"" binding.
+"" " `s{char}{label}`
+"nmap s <Plug>(easymotion-overwin-f)
+"" " or
+"" " `s{char}{char}{label}`
+"" " Need one more keystroke, but on average, it may be more comfortable.
+"nmap s <Plug>(easymotion-overwin-f2)
+""
+""" Turn on case-insensitive feature
+"let g:EasyMotion_smartcase = 1
 
-" JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
+"" JK motions: Line motions
+"map <Leader>j <Plug>(easymotion-j)
+"map <Leader>k <Plug>(easymotion-k)
 
 nnoremap <C-n> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
@@ -219,6 +219,7 @@ nnoremap <silent> <leader>rn    <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> <leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
 xmap <silent> <leader>a <cmd>lua vim.lsp.buf.range_code_action()<CR>
 
+
 "Vista defaults
 let g:vista_default_executive = 'nvim_lsp'
 let g:vista_sidebar_width = 8
@@ -229,31 +230,28 @@ nnoremap <leader>t :Vista!<CR>
 " Dashboard
 let g:dashboard_default_executive ='fzf'
 let g:dashboard_fzf_float = 0
-let g:dashboard_custom_footer = [
-                \ '' 
-                \]
-    let g:dashboard_custom_header = [
-                \ "=================     ===============     ===============   ========  ========",
-                \ "\\\\ . . . . . . .\\\\   //. . . . . . .\\\\   //. . . . . . .\\\\  \\\\. . .\\\\// . . //",
-                \ "||. . ._____. . .|| ||. . ._____. . .|| ||. . ._____. . .|| || . . .\\/ . . .||",
-                \ "|| . .||   ||. . || || . .||   ||. . || || . .||   ||. . || ||. . . . . . . ||",
-                \ "||. . ||   || . .|| ||. . ||   || . .|| ||. . ||   || . .|| || . | . . . . .||",
-                \ "|| . .||   ||. _-|| ||-_ .||   ||. . || || . .||   ||. _-|| ||-_.|\\ . . . . ||",
-                \ "||. . ||   ||-'  || ||  `-||   || . .|| ||. . ||   ||-'  || ||  `|\\_ . .|. .||",
-                \ "|| . _||   ||    || ||    ||   ||_ . || || . _||   ||    || ||   |\\ `-_/| . ||",
-                \ "||_-' ||  .|/    || ||    \\|.  || `-_|| ||_-' ||  .|/    || ||   | \\  / |-_.||",
-                \ "||    ||_-'      || ||      `-_||    || ||    ||_-'      || ||   | \\  / |  `||",
-                \ "||    `'         || ||         `'    || ||    `'         || ||   | \\  / |   ||",
-                \ "||            .===' `===.         .==='.`===.         .===' /==. |  \\/  |   ||",
-                \ "||         .=='   \\_|-_ `===. .==='   _|_   `===. .===' _-|/   `==  \\/  |   ||",
-                \ "||      .=='    _-'    `-_  `='    _-'   `-_    `='  _-'   `-_  /|  \\/  |   ||",
-                \ "||   .=='    _-'          `-__\\._-'         `-_./__-'         `' |. /|  |   ||",
-                \ "||.=='    _-'                                                     `' |  /==.||",
-                \ "=='    _-'                        N E O V I M                         \\/   `==",
-                \ "\\   _-'                                                                `-_   /",
-                \ " `''                                                                      ``'  ",
-                \ "                                                                               ",
-                \ ]
+
+let g:dashboard_custom_header =<< trim END
+=================     ===============     ===============   ========  ========
+\\ . . . . . . .\\   //. . . . . . .\\   //. . . . . . .\\  \\. . .\\// . . //
+||. . ._____. . .|| ||. . ._____. . .|| ||. . ._____. . .|| || . . .\/ . . .||
+|| . .||   ||. . || || . .||   ||. . || || . .||   ||. . || ||. . . . . . . ||
+||. . ||   || . .|| ||. . ||   || . .|| ||. . ||   || . .|| || . | . . . . .||
+|| . .||   ||. _-|| ||-_ .||   ||. . || || . .||   ||. _-|| ||-_.|\ . . . . ||
+||. . ||   ||-'  || ||  `-||   || . .|| ||. . ||   ||-'  || ||  `|\_ . .|. .||
+|| . _||   ||    || ||    ||   ||_ . || || . _||   ||    || ||   |\ `-_/| . ||
+||_-' ||  .|/    || ||    \|.  || `-_|| ||_-' ||  .|/    || ||   | \  / |-_.||
+||    ||_-'      || ||      `-_||    || ||    ||_-'      || ||   | \  / |  `||
+||    `'         || ||         `'    || ||    `'         || ||   | \  / |   ||
+||            .===' `===.         .==='.`===.         .===' /==. |  \/  |   ||
+||         .=='   \_|-_ `===. .==='   _|_   `===. .===' _-|/   `==  \/  |   ||
+||      .=='    _-'    `-_  `='    _-'   `-_    `='  _-'   `-_  /|  \/  |   ||
+||   .=='    _-'          '-__\._-'         '-_./__-'         `' |. /|  |   ||
+||.=='    _-'                                                     `' |  /==.||
+=='    _-'                        N E O V I M                         \/   `==
+\   _-'                                                                `-_   /
+ `''                                                                      ``'
+END
 
 
 
@@ -278,3 +276,22 @@ vnoremap < <gv
 vnoremap > >gv
 
 
+" Follow Rust code style rules
+au Filetype rust source ~/.config/nvim/scripts/spacetab.vim
+
+" Telescope
+nnoremap <Leader>fo :lua require'telescope.builtin'.oldfiles(require('telescope.themes').get_ivy({ winblend = 6, layout_config = { height = 14 } }))<cr>
+nnoremap <Leader>ff :lua require'telescope.builtin'.file_browser(require('telescope.themes').get_ivy({ winblend = 6} ))<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+
+" Sneak
+let g:sneak#s_next = 1
+
+" Vanilala autopairs
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O

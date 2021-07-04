@@ -23,7 +23,6 @@ local colors = {
     line_bg = '#353644',
     fg = '#8FBCBB',
     fg_green = '#65a380',
-
     yellow = '#fabd2f',
     cyan = '#008080',
     darkblue = '#081633',
@@ -55,8 +54,6 @@ local function trailing_whitespace()
     end
 end
 
-CocStatus = get_diagnostic_info
-CocFunc = get_current_func
 TrailingWhiteSpace = trailing_whitespace
 
 function has_file_type()
@@ -143,7 +140,7 @@ gls.left[4] = {
 
 gls.left[5] = {
   GitIcon = {
-    provider = function() return '  ' end,
+    provider = function() return '  ' end,
     condition = require('galaxyline.provider_vcs').check_git_workspace,
     highlight = {colors.orange,colors.line_bg},
   }
@@ -208,12 +205,9 @@ gls.left[11] = {
 
 gls.left[12] = {
   DiagnosticError = {
-    provider = function()
-      local n = vim.lsp.diagnostic.get_count(0, 'Error')
-      if n == 0 then return '' end
-      return string.format(' %s %d ', '', n)
-    end,
-    highlight = {colors.red,colors.bg}
+      provider = "DiagnosticError",
+      icon = '  ',
+      highlight = {colors.red,colors.bg}
   }
 }
 gls.left[13] = {
@@ -224,11 +218,8 @@ gls.left[13] = {
 
 gls.left[14] = {
   DiagnosticWarn = {
-    provider = function()
-	local n = vim.lsp.diagnostic.get_count(0, 'Warning')
-	if n == 0 then return '' end
-	return string.format(' %s %d ',  '' , n)
-    end,
+    provider = 'DiagnosticWarn',
+	icon = '  ',
     highlight = {colors.yellow,colors.bg},
   }
 }
@@ -237,12 +228,9 @@ gls.left[14] = {
 gls.left[15] = {
      LspStatus = {
       provider = function()
-	  return string.format(" %s ", lspclient.get_lsp_client())
+          return string.format("%s ", lspclient.get_lsp_client())
       end,
-      icon = '  🗱',
-      condition = function()
-	  return condition.check_active_lsp() and condition.hide_in_width()
-      end,
+      icon = '  ',
       highlight = {colors.green,colors.bg},
      }
 }
@@ -250,15 +238,9 @@ gls.left[15] = {
 gls.left[16] = {
   ShowLspClient = {
     provider = 'GetLspClient',
-    condition = function ()
-      local tbl = {['dashboard'] = true,['']=true}
-      if tbl[vim.bo.filetype] then
-        return false
-      end
-      return true
-    end,
+    condition = condition.check_active_lsp(),
     icon = '  λ: ',
-    highlight = {colors.yellow,colors.bg}
+    highlight = {colors.orange,colors.bg}
   }
 }
 
@@ -290,7 +272,7 @@ gls.right[5] = {
 gls.right[6] = {
   ScrollBar = {
     provider = 'ScrollBar',
-    highlight = {colors.yellow,colors.purple},
+    highlight = {colors.orange,colors.purple},
   }
 }
 --
