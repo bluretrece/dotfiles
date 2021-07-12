@@ -105,12 +105,7 @@ nnoremap <Leader>gaf :Gw<CR>
 " Invoke Undotree
 nnoremap <F5> :UndotreeToggle<CR>
 
-" MiniMap toggle
-" nmap <C-M> :MinimapToggle<CR>
-" let g:minimap_auto_start = 0
-
 "Go setup
-
 let g:go_fmt_command = "goimports"    "Run goimports along gofmt on each save     
 let g:go_auto_type_info = 1           "Automatically get signature/type info for object under cursor 
 
@@ -287,11 +282,11 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr>
 " Sneak
 let g:sneak#s_next = 1
 
-" Vanilala autopairs
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-inoremap {<CR> {<CR>}<ESC>O
-inoremap {;<CR> {<CR>};<ESC>O
+" Vanila autopairs
+" inoremap " ""<left>
+" inoremap ' ''<left>
+" inoremap ( ()<left>
+" inoremap [ []<left>
+" inoremap { {}<left>
+" inoremap {<CR> {<CR>}<ESC>O
+" inoremap {;<CR> {<CR>};<ESC>O

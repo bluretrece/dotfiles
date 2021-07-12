@@ -5,6 +5,7 @@ if exists('+termguicolors')
 endif
 
 let g:tokyonight_style = "storm"
+" let g:tokyonight_style = "night"
 let g:tokyonight_italic_keywords = 0
 let g:tokyonight_italic_comments = 0
 
